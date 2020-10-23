@@ -11,7 +11,6 @@ DROP TABLE IF EXISTS [UserProfile];
 DROP TABLE IF EXISTS [NonProfit];
 DROP TABLE IF EXISTS [NonProfitVolunteer];
 DROP TABLE IF EXISTS [Need];
-DROP TABLE IF EXISTS [NonProfitNeed];
 DROP TABLE IF EXISTS [Event];
 DROP TABLE IF EXISTS [NonProfitEvent];
 GO
@@ -52,20 +51,14 @@ CREATE TABLE [NonProfitVolunteer] (
 
 CREATE TABLE [Need] (
 [Id] integer PRIMARY KEY IDENTITY,
+  [NonProfitId] integer NOT NULL,
   [Item] NVARCHAR(28) NOT NULL,
   [Quantity] nvarchar(50) NOT NULL,
   [Description] nvarchar(500) NOT NULL,
   [CreateDateTime] nvarchar(50) NOT NULL,
-  [Location] nvarchar(555) NOT NULL
-)
+  [Location] nvarchar(555) NOT NULL,
 
-CREATE TABLE [NonProfitNeed] (
-  [id] integer PRIMARY KEY IDENTITY,
-  [NonProfitId] integer NOT NULL,
-  [NeedId] integer NOT NULL,
-  
-  CONSTRAINT [FK_NonProfitNeed_NonProfit] FOREIGN KEY ([NonProfitId]) REFERENCES [NonProfit] ([Id]),
-  CONSTRAINT [FK_NonProfitNeed_Need] FOREIGN KEY ([NeedId]) REFERENCES [Need] ([Id])
+   CONSTRAINT [FK_Need_NonProfit] FOREIGN KEY ([NonProfitId]) REFERENCES [NonProfit] ([Id])
 )
 
 CREATE TABLE [Event] (
