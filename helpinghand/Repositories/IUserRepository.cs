@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Tabloid.Models;
+using helpinghand.Models;
 
-namespace Tabloid.Repositories
+namespace helpinghand.Repositories
 {
     public interface IUserProfileRepository
     {
