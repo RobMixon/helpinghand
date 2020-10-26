@@ -10,7 +10,6 @@ import "./index.css";
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
 };
-console.log(firebaseConfig, "blue")
 firebase.initializeApp(firebaseConfig);
 
 

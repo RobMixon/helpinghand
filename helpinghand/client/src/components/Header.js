@@ -11,56 +11,36 @@ export default function Header() {
     return (
         <div>
             <Navbar color="dark" dark expand="md">
-                <NavbarBrand tag={RRNavLink} to="/">Tabloid</NavbarBrand>
+                <NavbarBrand tag={RRNavLink} to="/">Helping Hand</NavbarBrand>
                 <NavbarToggler onClick={toggle} />
                 <Collapse isOpen={isOpen} navbar>
                     <Nav className="mr-auto" navbar>
                         { /* When isLoggedIn === true, we will render the Home link */}
                         {isLoggedIn &&
-                            <NavItem>
-                                <NavLink tag={RRNavLink} to="/">Home</NavLink>
-                            </NavItem>
+                            <>
+                                <NavItem>
+                                    <NavLink tag={RRNavLink} to="/">Non-Profits</NavLink>
+                                </NavItem>
+                                <NavItem>
+                                    <NavLink tag={RRNavLink} to="/">Needs</NavLink>
+                                </NavItem>
+                                <NavItem>
+                                    <NavLink tag={RRNavLink} to="/">Events</NavLink>
+                                </NavItem>
+                            </>
                         }
                     </Nav>
-                    <Nav className="mr-auto" navbar>
-                        {isLoggedIn &&
-                            <NavItem>
-                                <NavLink tag={RRNavLink} to="/post">Posts</NavLink>
-                            </NavItem>
-                        }
-                    </Nav>
-                    <Nav className="mr-auto" navbar>
-                        {isLoggedIn &&
-                            <NavItem>
-                                <NavLink tag={RRNavLink} to="/tags">Tags</NavLink>
-                            </NavItem>
-                        }
-                    </Nav>
+
                     <Nav navbar>
                         {isLoggedIn &&
                             <>
                                 <NavItem>
-                                    <NavLink tag={RRNavLink} to="/categories">Categories</NavLink>
-                                </NavItem>
-                                <NavItem>
-                                    <NavLink tag={RRNavLink} to="/userprofile">Profiles</NavLink>
-                                </NavItem>
-
-                                {/* <NavItem>
-                  <NavLink tag={RRNavLink} to="/categories/add">Add Category</NavLink>
-                </NavItem> */}
-
-
-                                <NavItem>
                                     <NavLink tag={RRNavLink} onClick={logout} to="/login">Logout</NavLink>
                                 </NavItem>
-
-
                             </>
                         }
                         {!isLoggedIn &&
                             <>
-
                                 <NavItem>
                                     <NavLink tag={RRNavLink} to="/login">Login</NavLink>
                                 </NavItem>
@@ -68,8 +48,6 @@ export default function Header() {
                                 < NavItem >
                                     <NavLink tag={RRNavLink} to="/register">Register</NavLink>
                                 </NavItem>
-
-
                             </>
                         }
                     </Nav>
