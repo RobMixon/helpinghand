@@ -30,5 +30,67 @@ namespace helpinghand.Controllers
         {
             return Ok(_nonProfitRepository.GetAllNonProfits());
         }
+        //add nonprofit
+        [HttpPost]
+        public IActionResult Post(NonProfit NonProfit)
+        {
+            var currentUserProfile = GetCurrentUserProfile();
+            NonProfit.OwnerId = currentUserProfile.Id;
+            _nonProfitRepository.Add(NonProfit);
+            return CreatedAtAction("Get", new { id = NonProfit.Id }, NonProfit);
+        }
+        //gets current user profile
+        private UserProfile GetCurrentUserProfile()
+        {
+            var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            return _userProfileRepository.GetByFirebaseUserId(firebaseUserId);
+        }
+        //update nonprofit
+        [HttpPut("{Id}")]
+
+        public IActionResult Put(int Id, NonProfit nonProfit)
+        {
+            var currentUserProfile = GetCurrentUserProfile();
+            var NonProfitFromDB = _nonProfitRepository.GetNonProfitById(Id);
+            if (NonProfitFromDB.OwnerId == currentUserProfile.Id)
+            {
+                _nonProfitRepository.Update(nonProfit);
+                return Ok();
+            }
+            else
+            {
+                return Unauthorized();
+            }
+        }
+        //get nonprofit by id
+        [HttpGet("{id}")]
+        public IActionResult Get(int id)
+        {
+            var NonProfit = _nonProfitRepository.GetNonProfitById(id);
+            if (NonProfit == null)
+            {
+                return NotFound();
+            }
+            return Ok(NonProfit);
+        }
+
+        //delete nonprofit
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            var currentUserProfile = GetCurrentUserProfile();
+            var NonProfit = _nonProfitRepository.GetNonProfitById(id);
+
+            if (NonProfit.OwnerId == currentUserProfile.Id)
+            {
+                _nonProfitRepository.Delete(id);
+                return NoContent();
+            }
+
+            else
+            {
+                return Unauthorized();
+            }
+        }
     }
 }

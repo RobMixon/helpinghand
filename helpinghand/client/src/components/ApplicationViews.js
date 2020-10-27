@@ -12,7 +12,7 @@ export default function ApplicationViews() {
         <main>
             <Switch>
                 <Route path="/" exact>
-                    {<Hello />}
+                    {isLoggedIn ? <Hello /> : <Redirect to="/login" />}
                 </Route>
 
                 <Route path="/login">
@@ -21,6 +21,10 @@ export default function ApplicationViews() {
 
                 <Route path="/register">
                     <Register />
+                </Route>
+
+                <Route path="/onProfits">
+                    {isLoggedIn ? <NonProfitList /> : <Redirect to="/login" />}
                 </Route>
 
             </Switch>
