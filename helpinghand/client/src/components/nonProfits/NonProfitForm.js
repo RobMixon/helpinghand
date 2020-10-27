@@ -1,97 +1,52 @@
 import React, { useState, useContext, useEffect, useRef } from "react";
 import { Form, FormGroup, Card, CardBody, Label, Input, Button, InputGroup, InputGroupAddon, InputGroupText, Alert } from "reactstrap";
-import { PostContext } from "../../providers/PostProvider";
+import { NonProfitContext } from "../../providers/NonProfitProvider";
 import { useHistory } from "react-router-dom";
-import { CategoryContext } from "../../providers/CategoryProvider";
-import { ImageContext } from "../../providers/ImageProvider";
 
-const PostForm = () => {
-    const { addPost } = useContext(PostContext);
-    const { categories, getAllCategories } = useContext(CategoryContext);
-    const { uploadImage } = useContext(ImageContext);
-    //const [userProfileId, setUserProfileId] = useState("");
-    const [imageLocation, setImageLocation] = useState("");
-    const [createDateTime, setCreateDateTime] = useState("");
-    const [categoryId, setCategoryId] = useState(0);
+const NonProfitForm = () => {
+    const { addNonProfit } = useContext(NonProfitContext);
     const history = useHistory();
-    const [imagePreview, setImagePreview] = useState(null);
-    const title = useRef();
-    const content = useRef();
-    const imageUrl = useRef();
-
-    useEffect(() => {
-        getAllCategories()
-    }, []);
-
-    const previewImage = evt => {
-        if (evt.target.files.length) {
-            setImagePreview(URL.createObjectURL(evt.target.files[0]));
-        }
-    };
-
-    const previewImageUrl = evt => {
-        if (evt.target.value.length) {
-            setImagePreview(evt.target.value);
-        }
-    }
+    const name = useRef();
+    const location = useRef();
+    const cause = useRef();
+    const description = useRef();
+    const missionStatement = useRef();
+    const website = useRef();
 
     const submit = () => {
-        const post = {
-            title: title.current.value,
-            content: content.current.value,
-            categoryId,
-            //userProfileId: JSON.parse(sessionStorage.getItem("userProfile")).id
+        const nonProfit = {
+            name: name.current.value,
+            ownerId: JSON.parse(sessionStorage.getItem('userProfile')).id,
+            location: location.current.value,
+            cause: cause.current.value,
+            description: description.current.value,
+            missionStatement: missionStatement.current.value,
+            website: website.current.value
         };
-        post.categoryId = JSON.parse(post.categoryId)
-        if (post.title === "") {
-            window.alert("Please add a title")
+        if (nonProfit.name === "") {
+            window.alert("Please add a name")
         }
-        if (post.content === "") {
-            window.alert("what is a post with no content?")
+        if (nonProfit.location === "") {
+            window.alert("what is the location of the Non-Profit?")
         }
-        if (post.categoryId === 0) {
-            window.alert("please select a category")
+        if (nonProfit.cause === "") {
+            window.alert("please tell us what cause the Non-Profit is driven by?")
         }
-        // Image Upload
-        const file = document.querySelector('input[type="file"]').files[0];
-
-        if (file !== undefined) {
-            const fileType = file.name.split('.').pop();
-
-            const availFileTypes = [
-                'png',
-                'bmp',
-                'jpeg',
-                'jpg',
-                'gif',
-                'PNG',
-                'BMP',
-                'JPEG',
-                'GIF',
-                'JPG'
-            ];
-
-            if (!availFileTypes.includes(fileType)) {
-                alert('Accepted Image File Types: .png, .bmp, .jpeg, .jpg, and .gif');
-                return;
-            }
-            else {
-                const newImageName = `${new Date().getTime()}.${fileType}`;
-
-                const formData = new FormData();
-                formData.append('file', file, newImageName);
-
-                uploadImage(formData, newImageName);
-                post.imageLocation = newImageName;
-            }
+        if (nonProfit.description === "") {
+            window.alert("please give us a description")
         }
-        else if (file === undefined && imageUrl.current.value !== "") {
-            post.imageLocation = imageUrl.current.value;
+        if (nonProfit.missionStatement === "") {
+            window.alert("please tell us your Non-Profit's mission statement?")
+        }
+        if (nonProfit.website === "") {
+            window.alert("please tell us the website of your Non-Profit?")
         }
 
-        if (post.title !== "" && post.content !== "" && post.categoryId !== 0) {
-            addPost(post).then((res) => {
-                history.push(`/posts/${res.id}`);
+        if (nonProfit.name !== "" && nonProfit.location !== "" && nonProfit.cause !== "" &&
+            nonProfit.description !== "" && nonProfit.missionStatement !== "" && nonProfit.website !== "") {
+            addNonProfit(nonProfit).then((res) => {
+                history.push(`/nonProfits/`);
+                // history.push(`/nonProfit/${res.id}`);
             });
         }
 
@@ -104,64 +59,48 @@ const PostForm = () => {
                     <CardBody>
                         <Form encType="multipart/form-data">
                             <FormGroup>
-                                <Label for="title">Title</Label>
+                                <Label for="name">Name</Label>
                                 <Input
-                                    id="title"
-                                    innerRef={title}
+                                    id="name"
+                                    innerRef={name}
                                 />
                             </FormGroup>
                             <FormGroup>
-                                <Label for="content">Content</Label>
-                                <Input type="textarea" rows="10" id="content" innerRef={content} />
+                                <Label for="location">Location</Label>
+                                <Input type="textarea"
+                                    rows="1" id="location"
+                                    innerRef={location} />
                             </FormGroup>
                             <FormGroup>
-                                <Label for="imageUpload">Upload an Image</Label>
-                                <Input
-                                    type="file"
-                                    name="file"
-                                    id="imageUpload"
-                                    onChange={previewImage}
-                                    onClick={() => imageUrl.current.value = ""} />
-                                <InputGroup className="mt-2">
-                                    <InputGroupAddon addonType="prepend">
-                                        <InputGroupText>OR</InputGroupText>
-                                    </InputGroupAddon>
-
-                                    <Input
-                                        type="text"
-                                        name="imageUrl"
-                                        id="imageUrl"
-                                        innerRef={imageUrl}
-                                        placeholder="Input an Image URL"
-                                        onChange={previewImageUrl}
-
-                                    />
-                                </InputGroup>
+                                <Label for="cause">Cause</Label>
+                                <Input type="textarea"
+                                    rows="2" id="cause"
+                                    innerRef={cause} />
                             </FormGroup>
                             <FormGroup>
-                                {
-                                    imagePreview === null ?
-                                        <Alert color="light">No image provided.</Alert>
-                                        : <img src={imagePreview} alt="preview" className="img-thumbnail" />
-                                }
+                                <Label for="description">Description</Label>
+                                <Input type="textarea"
+                                    rows="10" id="description"
+                                    innerRef={description} />
                             </FormGroup>
                             <FormGroup>
-                                <Label for="categoryId">Category</Label>
-                                <select defaultValue="" name="categoryId" id="categoryId" className="form-control" onChange={(e) => setCategoryId(e.target.value)}>
-                                    <option value="0">Select a Category</option>
-                                    {categories.map(e => (
-                                        <option key={e.id} value={e.id}>
-                                            {e.name}
-                                        </option>
-                                    ))}
-                                </select>
+                                <Label for="missionStatement">Mission Statement</Label>
+                                <Input type="textarea"
+                                    rows="2" id="missionStatement"
+                                    innerRef={missionStatement} />
+                            </FormGroup>
+                            <FormGroup>
+                                <Label for="website">Website</Label>
+                                <Input type="website"
+                                    rows="1" id="website"
+                                    innerRef={website} />
                             </FormGroup>
                         </Form>
                         <Button color="info" onClick={submit}>
                             SUBMIT
                         </Button>
                         <Button color="info"
-                            onClick={() => { history.push(`/posts/`) }}>
+                            onClick={() => { history.push(`/nonProfits/`) }}>
                             Cancel
                         </Button>
                     </CardBody>
@@ -171,4 +110,4 @@ const PostForm = () => {
     );
 };
 
-export default PostForm;
+export default NonProfitForm;

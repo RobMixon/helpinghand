@@ -19,7 +19,7 @@ const NonProfitList = () => {
 
             <div className="container">
                 <Button color="danger"
-                    onClick={() => { history.push(`/nonProfitForm/`) }}>
+                    onClick={() => { history.push(`/nonProfitForm`) }}>
                     Create A Non-Profit
                     </Button>
                 <div className="row justify-content-center">

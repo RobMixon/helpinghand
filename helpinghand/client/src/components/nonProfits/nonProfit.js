@@ -8,18 +8,31 @@ import { useHistory, Link, useParams } from "react-router-dom"
 const NonProfit = ({ nonProfit }) => {
     //const { deleteComment } = useContext(CommentContext)
     //const { postId, commentId } = useParams();
-    const currentUser = JSON.parse(sessionStorage.getItem('userProfile')).id;
     // const submit = () => {
     //     deleteComment(comment.id).then(() => {
     //         history.push("/");
     //     })
 
+    let currentUser = JSON.parse(sessionStorage.getItem('userProfile')).id;
 
     return (
 
         <Card style={{ border: "none" }}>
             <div className="nonProfitCard">
                 <CardBody>
+                    <div>
+                        {(currentUser === nonProfit.ownerId) ?
+                            <Link to={`/${nonProfit.id}/delete`}>
+                                <Button color="danger" className="commentButton">Delete</Button>
+                            </Link>
+                            : <div></div>}
+
+                        {(currentUser === nonProfit.ownerId) ?
+                            <Link to={`/${nonProfit.id}/edit`}>
+                                <Button className="commentButton">Edit</Button>
+                            </Link>
+                            : <div></div>}
+                    </div>
                     <div>{nonProfit.name}</div>
                     <div>{nonProfit.ownerId}</div>
                     <div>{nonProfit.location}</div>
