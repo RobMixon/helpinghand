@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { UserProfileContext } from "../providers/UserProfileProvider";
+import NonProfitList from "../components/nonProfits/nonProfitList"
 import Login from "./Login";
 import Register from "./Register";
 import Hello from "./Hello";
@@ -23,7 +24,7 @@ export default function ApplicationViews() {
                     <Register />
                 </Route>
 
-                <Route path="/onProfits">
+                <Route path="/nonProfits">
                     {isLoggedIn ? <NonProfitList /> : <Redirect to="/login" />}
                 </Route>
 
