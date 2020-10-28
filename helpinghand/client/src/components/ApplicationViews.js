@@ -6,6 +6,11 @@ import NonProfitForm from "../components/nonProfits/NonProfitForm";
 import NonProfitDetail from "../components/nonProfits/nonProfitDetail";
 import NonProfitEditForm from "../components/nonProfits/nonProfitEditForm";
 import NonProfitDelete from "../components/nonProfits/nonProfitDelete";
+import NeedList from "../components/needs/needList";
+import NeedForm from "../components/needs/needForm";
+import NeedDetail from "../components/needs/needDetail";
+import NeedDelete from "../components/needs/needDelete";
+import NeedEditForm from "../components/needs/needEditForm";
 import Login from "./Login";
 import Register from "./Register";
 import Hello from "./Hello";
@@ -39,6 +44,21 @@ export default function ApplicationViews() {
                 </Route>
                 <Route path="/nonProfit/delete/:id" exact>
                     {isLoggedIn ? <NonProfitDelete /> : <Redirect to="/login" />}
+                </Route>
+                <Route path="/need" exact>
+                    {isLoggedIn ? <NeedList /> : <Redirect to="/login" />}
+                </Route>
+                <Route path="/need/needForm" exact>
+                    {isLoggedIn ? <NeedForm /> : <Redirect to="/login" />}
+                </Route>
+                <Route path="/need/details/:id" exact>
+                    {isLoggedIn ? <NeedDetail /> : <Redirect to="/login" />}
+                </Route>
+                <Route path="/need/edit/:id" exact>
+                    {isLoggedIn ? <NeedEditForm /> : <Redirect to="/login" />}
+                </Route>
+                <Route path="/need/delete/:id" exact>
+                    {isLoggedIn ? <NeedDelete /> : <Redirect to="/login" />}
                 </Route>
 
             </Switch>

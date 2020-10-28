@@ -1,7 +1,6 @@
 import React, { useEffect, useContext, useState } from "react";
 import { NonProfitContext } from "../../providers/NonProfitProvider";
 import { Link, useParams } from "react-router-dom";
-import NonProfit from "../nonProfits/nonProfit";
 import { Button, Card, CardBody } from "reactstrap";
 
 const NonProfitDetail = () => {
@@ -16,8 +15,6 @@ const NonProfitDetail = () => {
     if (!nonProfit) {
         return null;
     }
-
-    console.log(nonProfit, 'red')
 
     const currentUser = JSON.parse(sessionStorage.getItem('userProfile')).id;
 

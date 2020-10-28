@@ -22,7 +22,7 @@ export default function Header() {
                                     <NavLink tag={RRNavLink} to="/nonProfit" exact>Non-Profits</NavLink>
                                 </NavItem>
                                 <NavItem>
-                                    <NavLink tag={RRNavLink} to="/">Needs</NavLink>
+                                    <NavLink tag={RRNavLink} to="/need">Needs</NavLink>
                                 </NavItem>
                                 <NavItem>
                                     <NavLink tag={RRNavLink} to="/">Events</NavLink>

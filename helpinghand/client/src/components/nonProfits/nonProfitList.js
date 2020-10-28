@@ -1,8 +1,8 @@
 import React, { useContext, useEffect } from "react";
-import { Button, Card, CardBody } from "reactstrap";
+import { Button } from "reactstrap";
 import { NonProfitContext } from "../../providers/NonProfitProvider";
 import NonProfit from "./nonProfit";
-import { useParams, useHistory, Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 
 
@@ -16,9 +16,8 @@ const NonProfitList = () => {
 
     return (
         <>
-
             <div className="container">
-                <Button color="danger"
+                <Button
                     onClick={() => { history.push(`/nonProfitForm`) }}>
                     Create A Non-Profit
                     </Button>
@@ -33,7 +32,6 @@ const NonProfitList = () => {
             </div>
         </>
     )
-
 };
 
 export default NonProfitList;
