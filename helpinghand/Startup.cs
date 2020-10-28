@@ -23,8 +23,10 @@ public class Startup
     {
         services.AddTransient<IUserProfileRepository, UserProfileRepository>();
             services.AddTransient<INonProfitRepository, NonProfitRepository>();
+            //services.AddTransient<IEventRepository, EventRepository>();
+            services.AddTransient<INeedRepository, NeedRepository>();
 
-        var firebaseProjectId = Configuration.GetValue<string>("FirebaseProjectId");
+            var firebaseProjectId = Configuration.GetValue<string>("FirebaseProjectId");
         var googleTokenUrl = $"https://securetoken.google.com/{firebaseProjectId}";
         services
             .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

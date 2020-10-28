@@ -1,7 +1,7 @@
 import React, { useEffect, useContext, useState } from "react";
-import { ListGroup, ListGroupItem, Card, CardImg, CardBody, Button } from "reactstrap";
+import { Card, CardBody, Button } from "reactstrap";
 import { NonProfitContext } from "../../providers/NonProfitProvider";
-import { useParams, useHistory, Link } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 
 const NonProfitDelete = () => {
     const [nonProfit, setNonProfit] = useState();
@@ -12,7 +12,6 @@ const NonProfitDelete = () => {
     useEffect(() => {
         getSingleNonProfit(id).then(setNonProfit);
     }, []);
-
     if (!nonProfit) {
         return null;
     }

@@ -11,6 +11,7 @@ namespace helpinghand.Models
         public int Id { get; set; }
         [Required]
         public int NonProfitId { get; set; }
+        public NonProfit NonProfit { get; set; }
         [MaxLength(50)]
         public string Item { get; set; }
         public string Quantity { get; set; }
