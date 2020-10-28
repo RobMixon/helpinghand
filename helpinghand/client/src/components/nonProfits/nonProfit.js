@@ -1,17 +1,9 @@
 import { Button, Card, CardBody } from "reactstrap";
-import { NonProfitContext } from "../../providers/NonProfitProvider";
-import React, { useContext, useState } from "react";
-import { useHistory, Link, useParams } from "react-router-dom"
-//import "./nonProfit.css"
+import React from "react";
+import { Link } from "react-router-dom"
 
 
 const NonProfit = ({ nonProfit }) => {
-    //const { deleteComment } = useContext(CommentContext)
-    //const { postId, commentId } = useParams();
-    // const submit = () => {
-    //     deleteComment(comment.id).then(() => {
-    //         history.push("/");
-    //     })
 
     let currentUser = JSON.parse(sessionStorage.getItem('userProfile')).id;
 
@@ -27,14 +19,20 @@ const NonProfit = ({ nonProfit }) => {
                                 <Button className="commentButton">Edit</Button>
                             </Link>
                             : <div></div>}
-                        <Link to={`nonProfit/details/${nonProfit.id}`}>
-                            <Button className="commentButton">Details</Button>
-                        </Link>
                         {(currentUser === nonProfit.ownerId) ?
                             <Link to={`nonProfit/delete/${nonProfit.id}`}>
                                 <Button color="danger" className="commentButton">Delete</Button>
                             </Link>
                             : <div></div>}
+                        <Link to={`nonProfit/details/${nonProfit.id}`}>
+                            <Button className="commentButton">Details</Button>
+                        </Link>
+                        <Link to={`need/`}>
+                            <Button className="commentButton">Needs</Button>
+                        </Link>
+                        <Link to={`nonProfit/details/${nonProfit.id}`}>
+                            <Button className="commentButton">Events</Button>
+                        </Link>
 
                     </div>
                     <div>{nonProfit.id}</div>

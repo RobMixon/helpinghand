@@ -1,5 +1,5 @@
-import React, { useState, useContext, useEffect, useRef } from "react";
-import { Form, FormGroup, Card, CardBody, Label, Input, Button, InputGroup, InputGroupAddon, InputGroupText, Alert } from "reactstrap";
+import React, { useContext, useRef } from "react";
+import { Form, FormGroup, Card, CardBody, Label, Input, Button } from "reactstrap";
 import { NonProfitContext } from "../../providers/NonProfitProvider";
 import { useHistory } from "react-router-dom";
 
