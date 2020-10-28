@@ -45,7 +45,7 @@ const NonProfitForm = () => {
         if (nonProfit.name !== "" && nonProfit.location !== "" && nonProfit.cause !== "" &&
             nonProfit.description !== "" && nonProfit.missionStatement !== "" && nonProfit.website !== "") {
             addNonProfit(nonProfit).then((res) => {
-                history.push(`/nonProfits/`);
+                history.push(`/nonProfit`);
                 // history.push(`/nonProfit/${res.id}`);
             });
         }
@@ -80,7 +80,7 @@ const NonProfitForm = () => {
                             <FormGroup>
                                 <Label for="description">Description</Label>
                                 <Input type="textarea"
-                                    rows="10" id="description"
+                                    rows="5" id="description"
                                     innerRef={description} />
                             </FormGroup>
                             <FormGroup>
@@ -100,7 +100,7 @@ const NonProfitForm = () => {
                             SUBMIT
                         </Button>
                         <Button color="info"
-                            onClick={() => { history.push(`/nonProfits/`) }}>
+                            onClick={() => { history.push(`/nonProfit`) }}>
                             Cancel
                         </Button>
                     </CardBody>

@@ -11,7 +11,7 @@ export const NonProfitProvider = (props) => {
 
     const getAllNonProfits = () => {
         getToken().then((token) =>
-            fetch(`/api/NonProfit/`, {
+            fetch(`/api/NonProfit`, {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -31,7 +31,7 @@ export const NonProfitProvider = (props) => {
 
     const addNonProfit = (nonProfit) =>
         getToken().then((token) =>
-            fetch("/api/NonProfit/", {
+            fetch("/api/NonProfit", {
                 method: "POST",
                 headers: {
                     Authorization: `Bearer ${token}`,

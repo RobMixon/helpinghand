@@ -104,11 +104,11 @@ namespace helpinghand.Repositories
                          WHERE Id = @Id";
 
                     DbUtils.AddParameter(cmd, "@Name", nonProfit.Name);
-                    DbUtils.AddParameter(cmd, "@ImageLocation", nonProfit.Location);
-                    DbUtils.AddParameter(cmd, "@CreateDateTime", nonProfit.Cause);
-                    DbUtils.AddParameter(cmd, "@PublishDateTime", nonProfit.Description);
-                    DbUtils.AddParameter(cmd, "@IsApproved", nonProfit.MissionStatement);
-                    DbUtils.AddParameter(cmd, "@CategoryId", nonProfit.Website);
+                    DbUtils.AddParameter(cmd, "@Location", nonProfit.Location);
+                    DbUtils.AddParameter(cmd, "@Cause", nonProfit.Cause);
+                    DbUtils.AddParameter(cmd, "@Description", nonProfit.Description);
+                    DbUtils.AddParameter(cmd, "@MissionStatement", nonProfit.MissionStatement);
+                    DbUtils.AddParameter(cmd, "@Website", nonProfit.Website);
                     DbUtils.AddParameter(cmd, "@Id", nonProfit.Id);
 
                     cmd.ExecuteNonQuery();

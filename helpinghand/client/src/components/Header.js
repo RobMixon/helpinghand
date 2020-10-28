@@ -19,7 +19,7 @@ export default function Header() {
                         {isLoggedIn &&
                             <>
                                 <NavItem>
-                                    <NavLink tag={RRNavLink} to="/nonProfits" exact>Non-Profits</NavLink>
+                                    <NavLink tag={RRNavLink} to="/nonProfit" exact>Non-Profits</NavLink>
                                 </NavItem>
                                 <NavItem>
                                     <NavLink tag={RRNavLink} to="/">Needs</NavLink>

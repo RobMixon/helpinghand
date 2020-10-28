@@ -21,18 +21,23 @@ const NonProfit = ({ nonProfit }) => {
             <div className="nonProfitCard">
                 <CardBody>
                     <div>
+
                         {(currentUser === nonProfit.ownerId) ?
-                            <Link to={`/${nonProfit.id}/delete`}>
+                            <Link to={`nonProfit/edit/${nonProfit.id}`}>
+                                <Button className="commentButton">Edit</Button>
+                            </Link>
+                            : <div></div>}
+                        <Link to={`nonProfit/details/${nonProfit.id}`}>
+                            <Button className="commentButton">Details</Button>
+                        </Link>
+                        {(currentUser === nonProfit.ownerId) ?
+                            <Link to={`nonProfit/delete/${nonProfit.id}`}>
                                 <Button color="danger" className="commentButton">Delete</Button>
                             </Link>
                             : <div></div>}
 
-                        {(currentUser === nonProfit.ownerId) ?
-                            <Link to={`/${nonProfit.id}/edit`}>
-                                <Button className="commentButton">Edit</Button>
-                            </Link>
-                            : <div></div>}
                     </div>
+                    <div>{nonProfit.id}</div>
                     <div>{nonProfit.name}</div>
                     <div>{nonProfit.ownerId}</div>
                     <div>{nonProfit.location}</div>
