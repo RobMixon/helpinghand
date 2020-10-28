@@ -73,7 +73,17 @@ namespace helpinghand.Controllers
             }
             return Ok(NonProfit);
         }
-
+        // get nonprofit by ownerId
+        [HttpGet("NonProfit/{OwnerId}")]
+        public IActionResult GetByOwnerId(int OwnerId)
+        {
+            var NonProfit = _nonProfitRepository.GetNonProfitByOwnerId(OwnerId);
+            if (NonProfit == null)
+            {
+                return NotFound();
+            }
+            return Ok(NonProfit);
+        }
         //delete nonprofit
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)

@@ -1,15 +1,31 @@
-import React, { useContext, useRef } from "react";
+import React, { useContext, useRef, useEffect, useState } from "react";
 import { Form, FormGroup, Card, CardBody, Label, Input, Button } from "reactstrap";
 import { NeedContext } from "../../providers/NeedProvider";
+import { NonProfitContext } from "../../providers/NonProfitProvider";
 import { useHistory } from "react-router-dom";
 
 const NeedForm = () => {
     const { addNeed } = useContext(NeedContext);
+    const { getNonProfitByOwnerId } = useContext(NonProfitContext);
+    const [nonProfit, setNonProfit] = useState();
     const history = useHistory();
     const item = useRef();
     const quantity = useRef();
     const description = useRef();
     const location = useRef();
+
+
+    const currentUser = JSON.parse(sessionStorage.getItem("userProfile")).id;
+    console.log(currentUser, "red")
+
+    useEffect(() => {
+        getNonProfitByOwnerId(currentUser).then(setNonProfit);
+    }, []);
+    if (!nonProfit) {
+        return null;
+    }
+
+    console.log(nonProfit, "blue")
 
     const submit = () => {
         const need = {
@@ -37,8 +53,8 @@ const NeedForm = () => {
                 history.push(`/need`);
             });
         }
-
     };
+
 
     return (
         <div className="container pt-4">
