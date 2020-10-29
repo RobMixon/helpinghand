@@ -27,7 +27,7 @@ const NonProfit = ({ nonProfit }) => {
                         <Link to={`nonProfit/details/${nonProfit.id}`}>
                             <Button className="commentButton">Details</Button>
                         </Link>
-                        <Link to={`need/`}>
+                        <Link to={`need`}>
                             <Button className="commentButton">Needs</Button>
                         </Link>
                         <Link to={`nonProfit/details/${nonProfit.id}`}>
