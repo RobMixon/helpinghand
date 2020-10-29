@@ -30,6 +30,12 @@ namespace helpinghand.Controllers
         {
             return Ok(_nonProfitRepository.GetAllNonProfits());
         }
+        // get nonprofit by ownerId
+        [HttpGet("owner/{ownerId}")]
+        public IActionResult GetByOwnerId(int ownerId)
+        {
+            return Ok(_nonProfitRepository.GetNonProfitByOwnerId(ownerId));
+        }
         //add nonprofit
         [HttpPost]
         public IActionResult Post(NonProfit NonProfit)
@@ -73,7 +79,6 @@ namespace helpinghand.Controllers
             }
             return Ok(NonProfit);
         }
-
         //delete nonprofit
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)

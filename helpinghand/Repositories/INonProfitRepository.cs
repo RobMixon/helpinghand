@@ -13,5 +13,6 @@ namespace helpinghand.Repositories
         NonProfit GetNonProfitById(int id);
         void Delete(int id);
         void Update(NonProfit nonProfit);
+        List<NonProfit> GetNonProfitByOwnerId(int ownerId);
     }
 }

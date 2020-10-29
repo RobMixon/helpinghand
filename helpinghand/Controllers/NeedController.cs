@@ -52,6 +52,7 @@ namespace helpinghand.Controllers
             return Ok();
         }
         //delete need
+        [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
             _needRepository.Delete(id);

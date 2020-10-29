@@ -29,6 +29,16 @@ export const NonProfitProvider = (props) => {
             }).then((res) => res.json())
         );
 
+    const getNonProfitByOwnerId = (id) =>
+        getToken().then((token) =>
+            fetch(`/api/NonProfit/owner/${id}`, {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }).then((res) => res.json())
+        );
+
     const addNonProfit = (nonProfit) =>
         getToken().then((token) =>
             fetch("/api/NonProfit", {
@@ -67,7 +77,7 @@ export const NonProfitProvider = (props) => {
             }));
 
     return (
-        <NonProfitContext.Provider value={{ nonProfits, getAllNonProfits, getSingleNonProfit, addNonProfit, deleteNonProfit, editNonProfit }}>
+        <NonProfitContext.Provider value={{ nonProfits, getNonProfitByOwnerId, getAllNonProfits, getSingleNonProfit, addNonProfit, deleteNonProfit, editNonProfit }}>
             {props.children}
         </NonProfitContext.Provider>
     );
