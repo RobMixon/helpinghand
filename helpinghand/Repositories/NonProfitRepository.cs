@@ -123,6 +123,8 @@ namespace helpinghand.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
+                                        DELETE FROM Need
+                                        WHERE NonProfitId = @id
                                         DELETE FROM NonProfit
                                         WHERE Id = @id;";
 
