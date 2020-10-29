@@ -31,7 +31,7 @@ export const NonProfitProvider = (props) => {
 
     const getNonProfitByOwnerId = (id) =>
         getToken().then((token) =>
-            fetch(`/api/NonProfit/NonProfit/${id}`, {
+            fetch(`/api/NonProfit/owner/${id}`, {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${token}`

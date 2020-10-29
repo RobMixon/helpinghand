@@ -179,7 +179,8 @@ namespace helpinghand.Repositories
                 }
             }
         }
-        public NonProfit GetNonProfitByOwnerId(int OwnerId)
+
+        public List<NonProfit> GetNonProfitByOwnerId(int ownerId)
         {
             using (var conn = Connection)
             {
@@ -187,20 +188,20 @@ namespace helpinghand.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                            SELECT n.Id, n.OwnerId, n.Name, n.Location, n.Cause, n.Description, n.MissionStatement,
+                             SELECT n.Id, n.OwnerId, n.Name, n.Location, n.Cause, n.Description, n.MissionStatement,
                                    n.website, up.FirstName, up.LastName, up.DisplayName, up.Email
                             FROM NonProfit n
                             LEFT JOIN UserProfile up on n.OwnerId = up.Id
                                          WHERE n.OwnerId = @OwnerId;";
 
-                    DbUtils.AddParameter(cmd, "@OwnerId", OwnerId);
+                    DbUtils.AddParameter(cmd, "@OwnerId", ownerId);
 
                     var reader = cmd.ExecuteReader();
 
-                    NonProfit nonProfit = null;
-                    if (reader.Read())
+                    var nonProfits = new List<NonProfit>();
+                    while (reader.Read())
                     {
-                        nonProfit = new NonProfit()
+                        nonProfits.Add(new NonProfit()
                         {
                             Id = DbUtils.GetInt(reader, "Id"),
                             OwnerId = DbUtils.GetInt(reader, "OwnerId"),
@@ -218,14 +219,15 @@ namespace helpinghand.Repositories
                                 DisplayName = DbUtils.GetString(reader, "DisplayName"),
                                 Email = DbUtils.GetString(reader, "Email")
                             }
-                        };
+                        });
                     }
 
                     reader.Close();
 
-                    return nonProfit;
+                    return nonProfits;
                 }
             }
         }
+
     }
 }

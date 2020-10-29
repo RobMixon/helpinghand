@@ -22,11 +22,6 @@ const Need = ({ need }) => {
                                 <Button color="danger" className="commentButton">Delete</Button>
                             </Link>
                             : <div></div>}
-                        {(currentUser === need.nonProfit.ownerId) ?
-                            <Link to={`need/needForm`}>
-                                <Button className="commentButton">Add Need</Button>
-                            </Link>
-                            : <div></div>}
                         <Link to={`need/details/${need.id}`}>
                             <Button className="commentButton">Details</Button>
                         </Link>
