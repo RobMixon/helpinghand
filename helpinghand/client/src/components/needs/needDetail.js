@@ -4,7 +4,7 @@ import { Link, useParams, useHistory } from "react-router-dom";
 import { Button, Card, CardBody } from "reactstrap";
 
 const NeedDetail = () => {
-    const [need, setNeed] = useState(null);
+    const [need, setNeed] = useState();
     const { getNeedById } = useContext(NeedContext);
     const { id } = useParams();
     const history = useHistory();

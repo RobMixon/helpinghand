@@ -13,16 +13,16 @@ const Need = ({ need }) => {
             <div className="nonProfitCard">
                 <CardBody>
                     <div>
-                        <Link to={`need/details/${need.id}`}>
+                        <Link to={`/need/details/${need.id}`}>
                             <Button color="info" className="commentButton">Details</Button>
                         </Link>
                         {(currentUser === need.nonProfit.ownerId) ?
-                            <Link to={`need/edit/${need.id}`}>
+                            <Link to={`/need/edit/${need.id}`}>
                                 <Button color="info" className="commentButton">Edit</Button>
                             </Link>
                             : <div></div>}
                         {(currentUser === need.nonProfit.ownerId) ?
-                            <Link to={`need/delete/${need.id}`}>
+                            <Link to={`/need/delete/${need.id}`}>
                                 <Button color="danger" className="commentButton">Delete</Button>
                             </Link>
                             : <div></div>}

@@ -14,7 +14,7 @@ const NonProfit = ({ nonProfit }) => {
             <div className="nonProfitCard">
                 <CardBody>
                     <div>
-                        <Link to={`need`}>
+                        <Link to={`nonprofit/${nonProfit.id}/need`}>
                             <Button color="info" className="commentButton">Needs</Button>
                         </Link>
                         <Link to={`nonProfit/details/${nonProfit.id}`}>
