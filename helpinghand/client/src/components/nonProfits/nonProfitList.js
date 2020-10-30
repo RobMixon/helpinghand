@@ -18,10 +18,11 @@ const NonProfitList = () => {
         <>
             <div className="container">
                 <Button
+                    color="info"
                     onClick={() => { history.push(`/nonProfitForm`) }}>
                     Create A Non-Profit
                     </Button>
-                <div className="row justify-content-center">
+                <div className="row justify-content-left">
                     <div className="cards-column">
                         {nonProfits.map((nonProfit) =>
                             <NonProfit key={nonProfit.id} nonProfit={nonProfit}

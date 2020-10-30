@@ -1,13 +1,13 @@
 import React, { useEffect, useContext, useState } from "react";
 import { NonProfitContext } from "../../providers/NonProfitProvider";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useHistory } from "react-router-dom";
 import { Button, Card, CardBody } from "reactstrap";
 
 const NonProfitDetail = () => {
     const [nonProfit, setNonProfit] = useState(null);
     const { getSingleNonProfit } = useContext(NonProfitContext);
     const { id } = useParams();
-
+    const history = useHistory();
 
     useEffect(() => {
         getSingleNonProfit(id).then(setNonProfit);
@@ -29,7 +29,7 @@ const NonProfitDetail = () => {
 
                                     {(currentUser === nonProfit.ownerId) ?
                                         <Link to={`/nonProfit/edit/${nonProfit.id}`}>
-                                            <Button className="commentButton">Edit</Button>
+                                            <Button color="info" className="commentButton">Edit</Button>
                                         </Link>
                                         : <div></div>}
                                     {(currentUser === nonProfit.ownerId) ?
@@ -51,6 +51,14 @@ const NonProfitDetail = () => {
                                 <div>{nonProfit.userProfile.displayName}</div>
                                 <div>{nonProfit.userProfile.email}</div>
                                 <div>{nonProfit.userProfile.fullName}</div>
+                                <br></br>
+                                <Button
+                                    color="info"
+                                    onClick={() => {
+                                        history.push(`/nonProfit`)
+                                    }}
+                                >Back
+                                </Button>
                             </CardBody>
                         </div>
                     </Card>

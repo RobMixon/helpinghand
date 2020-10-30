@@ -10,7 +10,6 @@ const NeedForm = () => {
     const { addNeed } = useContext(NeedContext);
     const { getNonProfitByOwnerId } = useContext(NonProfitContext);
     const [nonProfit, setNonProfit] = useState();
-    const [dropdownOpen, setDropdownOpen] = useState(false);
     const history = useHistory();
     const item = useRef();
     const quantity = useRef();
@@ -76,6 +75,7 @@ const NeedForm = () => {
                         <Form encType="multipart/form-data">
                             <DropdownButton
                                 title="NonProfits"
+                                color="info"
                                 id="dropdown-menu"
                                 className="nonProfit_Dropdown_menu"
                                 onSelect={handleSelect}>
@@ -85,7 +85,6 @@ const NeedForm = () => {
                                             className="dropDown_item"
                                             key={np.id}
                                             eventKey={np.name}>{np.name}</Dropdown.Item>)}
-                                    <Dropdown.Divider />
                                 </div>
                             </DropdownButton>
                             <FormGroup>
@@ -114,10 +113,13 @@ const NeedForm = () => {
                                     innerRef={location} />
                             </FormGroup>
                         </Form>
-                        <Button onClick={submit}>
+                        <Button
+                            onClick={submit}
+                            color="info">
                             SUBMIT
                         </Button>
                         <Button
+                            color="info"
                             onClick={() => { history.push(`/need`) }}>
                             Cancel
                         </Button>

@@ -12,6 +12,7 @@ using helpinghand.Repositories;
 
 namespace helpinghand.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class NeedController : Controller
