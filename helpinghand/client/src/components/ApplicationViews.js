@@ -12,6 +12,7 @@ import NeedForm from "../components/needs/needForm";
 import NeedDetail from "../components/needs/needDetail";
 import NeedDelete from "../components/needs/needDelete";
 import NeedEditForm from "../components/needs/needEditForm";
+import EventList from "../events/eventList";
 import Login from "./Login";
 import Register from "./Register";
 import Hello from "./Hello";
@@ -63,6 +64,9 @@ export default function ApplicationViews() {
                 </Route>
                 <Route path="/need/delete/:id" exact>
                     {isLoggedIn ? <NeedDelete /> : <Redirect to="/login" />}
+                </Route>
+                <Route path="/event" exact>
+                    {isLoggedIn ? <EventList /> : <Redirect to="/login" />}
                 </Route>
 
             </Switch>

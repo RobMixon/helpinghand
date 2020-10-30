@@ -8,5 +8,6 @@ namespace helpinghand.Repositories
 {
     public interface IEventRepository
     {
+        List<Event> GetAllEvents();
     }
 }
