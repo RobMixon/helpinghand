@@ -71,15 +71,10 @@ namespace helpinghand.Controllers
             return Ok(Need);
         }
         //get need by NonProfitid
-        [HttpGet("need/{NonProfitid}")]
+        [HttpGet("NPneed/{NonProfitid}")]
         public IActionResult GetByNonProfitId(int NonProfitId)
         {
-            var Need = _needRepository.GetByNonProfitId(NonProfitId);
-            if (Need == null)
-            {
-                return NotFound();
-            }
-            return Ok(Need);
+            return Ok(_needRepository.GetByNonProfitId(NonProfitId));
         }
     }
 }

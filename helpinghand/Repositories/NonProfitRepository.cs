@@ -181,7 +181,7 @@ namespace helpinghand.Repositories
                 }
             }
         }
-
+        //get non profit by owner Id
         public List<NonProfit> GetNonProfitByOwnerId(int ownerId)
         {
             using (var conn = Connection)
