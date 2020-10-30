@@ -35,6 +35,48 @@ namespace helpinghand.Controllers
         {
             return Ok(_eventRepository.GetAllEvents());
         }
+        //add need
+        [HttpPost]
+        public IActionResult Post(Event Event)
+        {
+            _eventRepository.Add(Event);
+            return CreatedAtAction("Get", new { id = Event.Id }, Event);
+        }
+        //update need
+        [HttpPut("{Id}")]
 
+        public IActionResult Put(int Id, Event Event)
+        {
+            if (Id != Event.Id)
+            {
+                return BadRequest();
+            }
+            _eventRepository.Update(Event);
+            return Ok();
+        }
+        //delete need
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            _eventRepository.Delete(id);
+            return NoContent();
+        }
+        //get event by id
+        [HttpGet("{id}")]
+        public IActionResult Get(int id)
+        {
+            var Event = _eventRepository.GetEventById(id);
+            if (Event == null)
+            {
+                return NotFound();
+            }
+            return Ok(Event);
+        }
+        //get event by NonProfitid
+        [HttpGet("NPevent/{NonProfitid}")]
+        public IActionResult GetEventByNonProfitId(int NonProfitId)
+        {
+            return Ok(_eventRepository.GetEventByNonProfitId(NonProfitId));
+        }
     }
 }
