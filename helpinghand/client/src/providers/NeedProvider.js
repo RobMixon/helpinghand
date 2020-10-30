@@ -32,7 +32,7 @@ export const NeedProvider = (props) => {
 
     const getNeedByNonProfitId = (NonProfitId) =>
         getToken().then((token) =>
-            fetch(`/api/need/need/a${NonProfitId}`, {
+            fetch(`/api/need/NPneed/${NonProfitId}`, {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${token}`

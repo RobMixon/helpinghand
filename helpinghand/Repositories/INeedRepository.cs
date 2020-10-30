@@ -11,7 +11,7 @@ namespace helpinghand.Repositories
         List<Need> GetAllNeeds();
         void Add(Need need);
         Need GetNeedById(int id);
-        Need GetByNonProfitId(int NonProfitid);
+        List<Need> GetByNonProfitId(int NonProfitid);
         void Delete(int id);
         void Update(Need need);
     }

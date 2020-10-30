@@ -182,8 +182,8 @@ namespace helpinghand.Repositories
                 }
             }
         }
-        //get by NonProfitid
-        public Need GetByNonProfitId(int NonProfitId)
+        //get need by NonProfitid
+        public List<Need> GetByNonProfitId(int NonProfitId)
         {
             using (var conn = Connection)
             {
@@ -202,10 +202,10 @@ namespace helpinghand.Repositories
 
                     var reader = cmd.ExecuteReader();
 
-                    Need need = null;
-                    if (reader.Read())
+                    var needs = new List<Need>();
+                    while (reader.Read())
                     {
-                        need = new Need()
+                        needs.Add(new Need()
                         {
                             Id = DbUtils.GetInt(reader, "Id"),
                             NonProfitId = DbUtils.GetInt(reader, "NonProfitId"),
@@ -224,12 +224,12 @@ namespace helpinghand.Repositories
                                 MissionStatement = DbUtils.GetString(reader, "MissionStatement"),
                                 Website = DbUtils.GetString(reader, "Website")
                             }
-                        };
+                        });
                     }
 
                     reader.Close();
 
-                    return need;
+                    return needs;
                 }
             }
         }

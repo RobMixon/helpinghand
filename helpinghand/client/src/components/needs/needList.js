@@ -17,9 +17,9 @@ const NeedList = () => {
         <>
             <div className="container">
                 <Link to={`need/needForm`}>
-                    <Button className="commentButton">Add Need</Button>
+                    <Button color="info" className="commentButton">Add Need</Button>
                 </Link>
-                <div className="row justify-content-center">
+                <div className="row justify-content-left">
                     <div className="cards-column">
                         {needs.map((need) =>
                             <Need key={need.id} need={need}

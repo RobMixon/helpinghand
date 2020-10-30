@@ -11,7 +11,7 @@ using helpinghand.Repositories;
 
 namespace helpinghand.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class NonProfitController : Controller

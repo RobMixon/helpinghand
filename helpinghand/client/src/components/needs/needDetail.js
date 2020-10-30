@@ -4,7 +4,7 @@ import { Link, useParams, useHistory } from "react-router-dom";
 import { Button, Card, CardBody } from "reactstrap";
 
 const NeedDetail = () => {
-    const [need, setNeed] = useState(null);
+    const [need, setNeed] = useState();
     const { getNeedById } = useContext(NeedContext);
     const { id } = useParams();
     const history = useHistory();
@@ -22,7 +22,7 @@ const NeedDetail = () => {
     return (
         <div className="container">
             <div className="row justify-content-center">
-                <div className="col-sm-12 col-lg-6">
+                <div className="col-sm-20 col-lg-8">
                     <Card style={{ border: "none" }}>
                         <div className="nonProfitCard">
                             <CardBody>
@@ -30,7 +30,7 @@ const NeedDetail = () => {
 
                                     {(currentUser === need.nonProfit.ownerId) ?
                                         <Link to={`/need/edit/${need.id}`}>
-                                            <Button className="commentButton">Edit</Button>
+                                            <Button className="commentButton" color="info">Edit</Button>
                                         </Link>
                                         : <div></div>}
                                     {(currentUser === need.nonProfit.ownerId) ?
@@ -40,20 +40,17 @@ const NeedDetail = () => {
                                         : <div></div>}
 
                                 </div>
-                                <div>{need.description}</div>
-                                <div>{need.id} Nonprofit Id</div>
-                                <div>{need.item}</div>
-                                <div>{need.location}</div>
-                                <div>{need.quantity}</div>
-                                <div>{need.nonProfit.cause} NON  profit cause</div>
-                                <div>{need.nonProfit.description} NON profit description</div>
-                                <div>{need.nonProfit.id} NON profit id</div>
-                                <div>{need.nonProfit.location} nonprofit location</div>
-                                <div>{need.nonProfit.missionStatement}</div>
-                                <div>{need.nonProfit.name}</div>
-                                <div>{need.nonProfit.ownerId} np owner id</div>
-                                <div>{need.nonProfit.website}</div>
+                                <br></br>
+                                <div><span class="formText">Item: </span>{need.item}</div>
+                                <div><span class="formText">Description: </span>{need.description}</div>
+                                <div><span class="formText">Quantity: </span> {need.quantity}</div>
+                                <div><span class="formText">Location: </span>{need.location}</div>
+                                <div><span class="formText">Non-Profit in Need: </span>{need.nonProfit.name}</div>
+                                <div><span class="formText">Location of the Non-Profit: </span>{need.nonProfit.location} nonprofit location</div>
+                                <div><span class="formText">Get More Information on the Non-Profit: </span>{need.nonProfit.website}</div>
+                                <br></br>
                                 <Button
+                                    color="info"
                                     onClick={() => {
                                         history.push(`/need`)
                                     }}

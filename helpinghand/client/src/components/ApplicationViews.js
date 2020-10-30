@@ -6,6 +6,7 @@ import NonProfitForm from "../components/nonProfits/NonProfitForm";
 import NonProfitDetail from "../components/nonProfits/nonProfitDetail";
 import NonProfitEditForm from "../components/nonProfits/nonProfitEditForm";
 import NonProfitDelete from "../components/nonProfits/nonProfitDelete";
+import NeedsOfNonPorfit from "../components/nonProfits/needsOfNonProfit";
 import NeedList from "../components/needs/needList";
 import NeedForm from "../components/needs/needForm";
 import NeedDetail from "../components/needs/needDetail";
@@ -44,6 +45,9 @@ export default function ApplicationViews() {
                 </Route>
                 <Route path="/nonProfit/delete/:id" exact>
                     {isLoggedIn ? <NonProfitDelete /> : <Redirect to="/login" />}
+                </Route>
+                <Route path="/nonProfit/:id/need" exact>
+                    {isLoggedIn ? <NeedsOfNonPorfit /> : <Redirect to="/login" />}
                 </Route>
                 <Route path="/need" exact>
                     {isLoggedIn ? <NeedList /> : <Redirect to="/login" />}

@@ -47,30 +47,6 @@ button {
   cursor: pointer;
 }
 
-.dh-addTag {
-  display: flex;
-  width: 2rem;
-  height: 2rem;
-  background: hsl(0, 0%, 50%);
-  font-weight: normal;
-  box-shadow: 1px 1px 1px -1px hsl(0deg 0% 0% / 50%);
-  font-size: 1.5rem;
-  padding: .4rem;
-  line-height: 0.5;
-  border-radius: 10rem;
-  color: white;
-  margin-left: .75rem;
-  padding-bottom: 0.7rem;
-  align-items: center;
-  justify-content: center;
-}
-
-.dh-addTag:hover {
-  background: hsla(211, 100%, 40%, 1);
-  cursor: pointer;
-  color: white;
-}
-
 .xOut {
   font-size: .85rem;
   font-weight: 100;
@@ -81,4 +57,8 @@ button {
 
 .xOut:hover {
   color: hsla(0, 0%, 100%, 1);
+}
+
+button {
+  margin-right: 4px;
 }
