@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { Button } from "reactstrap";
-import { EventContext } from "../providers/EventProvider";
+import { EventContext } from "../../providers/EventProvider";
 import Event from "./event";
 import { useHistory, Link } from 'react-router-dom';
 
@@ -18,9 +18,9 @@ const EventList = () => {
     return (
         <>
             <div className="container">
-                {/* <Link to={`need/needForm`}>
-                    <Button color="info" className="commentButton">Add Need</Button>
-                </Link> */}
+                <Link to={`event/eventForm`}>
+                    <Button color="info" className="commentButton">Add Event</Button>
+                </Link>
                 <div className="row justify-content-left">
                     <div className="cards-column">
                         {events.map((event) =>

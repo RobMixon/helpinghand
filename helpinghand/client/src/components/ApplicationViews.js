@@ -12,7 +12,12 @@ import NeedForm from "../components/needs/needForm";
 import NeedDetail from "../components/needs/needDetail";
 import NeedDelete from "../components/needs/needDelete";
 import NeedEditForm from "../components/needs/needEditForm";
-import EventList from "../events/eventList";
+import EventList from "../components/events/eventList";
+import EventsOfNonProfit from "../components/events/eventsOfNonProfit";
+import EventForm from "../components/events/eventForm";
+import EventDelete from "../components/events/eventDelete";
+import EventDetail from "../components/events/eventDetail";
+import EventEditForm from "../components/events/eventEditForm";
 import Login from "./Login";
 import Register from "./Register";
 import Hello from "./Hello";
@@ -68,7 +73,21 @@ export default function ApplicationViews() {
                 <Route path="/event" exact>
                     {isLoggedIn ? <EventList /> : <Redirect to="/login" />}
                 </Route>
-
+                <Route path="/nonProfit/:id/event" exact>
+                    {isLoggedIn ? <EventsOfNonProfit /> : <Redirect to="/login" />}
+                </Route>
+                <Route path="/event/eventForm" exact>
+                    {isLoggedIn ? <EventForm /> : <Redirect to="/login" />}
+                </Route>
+                <Route path="/event/details/:id" exact>
+                    {isLoggedIn ? <EventDetail /> : <Redirect to="/login" />}
+                </Route>
+                <Route path="/event/delete/:id" exact>
+                    {isLoggedIn ? <EventDelete /> : <Redirect to="/login" />}
+                </Route>
+                <Route path="/event/edit/:id" exact>
+                    {isLoggedIn ? <EventEditForm /> : <Redirect to="/login" />}
+                </Route>
             </Switch>
         </main >
     );

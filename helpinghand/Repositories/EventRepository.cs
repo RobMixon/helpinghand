@@ -109,7 +109,7 @@ namespace helpinghand.Repositories
 
                     DbUtils.AddParameter(cmd, "@NonProfitId", Event.NonProfitId);
                     DbUtils.AddParameter(cmd, "@Name", Event.Name);
-                    DbUtils.AddParameter(cmd, "@Quantity", Event.CreateDateTime);
+                    DbUtils.AddParameter(cmd, "@CreateDateTime", Event.CreateDateTime);
                     DbUtils.AddParameter(cmd, "@Description", Event.Description);
                     DbUtils.AddParameter(cmd, "@Location", Event.Location);
                     DbUtils.AddParameter(cmd, "@Comments", Event.Comments);
@@ -197,7 +197,7 @@ namespace helpinghand.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                            SELECT n.Id, n.NonProfitId, n.Name AS EventName, n.Quantity, n.Description, n.Location AS EventLocation,
+                            SELECT n.Id, n.NonProfitId, n.Name AS EventName, n.CreateDateTime, n.Description, n.Location AS EventLocation,
                                    np.OwnerId, np.Name, np.Location, np.Cause, np.Description, np.MissionStatement,
                                    np.Website
                             FROM Event n

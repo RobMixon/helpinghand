@@ -17,7 +17,7 @@ const NonProfit = ({ nonProfit }) => {
                         <Link to={`nonprofit/${nonProfit.id}/need`}>
                             <Button color="info" className="commentButton">Needs</Button>
                         </Link>
-                        <Link to={`nonProfit/details/${nonProfit.id}`}>
+                        <Link to={`nonProfit/${nonProfit.id}/event`}>
                             <Button color="info" className="commentButton">Events</Button>
                         </Link>
                         <Link to={`nonProfit/details/${nonProfit.id}`}>

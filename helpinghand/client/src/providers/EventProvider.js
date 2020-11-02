@@ -20,65 +20,65 @@ export const EventProvider = (props) => {
                 .then(setEvents));
     };
 
-    // const getNeedById = (id) =>
-    //     getToken().then((token) =>
-    //         fetch(`/api/need/${id}`, {
-    //             method: "GET",
-    //             headers: {
-    //                 Authorization: `Bearer ${token}`
-    //             }
-    //         }).then((res) => res.json())
-    //     );
+    const getEventById = (id) =>
+        getToken().then((token) =>
+            fetch(`/api/event/${id}`, {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }).then((res) => res.json())
+        );
 
-    // const getNeedByNonProfitId = (NonProfitId) =>
-    //     getToken().then((token) =>
-    //         fetch(`/api/need/NPneed/${NonProfitId}`, {
-    //             method: "GET",
-    //             headers: {
-    //                 Authorization: `Bearer ${token}`
-    //             }
-    //         }).then((res) => res.json())
-    //     );
+    const getEventByNonProfitId = (NonProfitId) =>
+        getToken().then((token) =>
+            fetch(`/api/event/NPevent/${NonProfitId}`, {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }).then((res) => res.json())
+        );
 
-    // const addNeed = (need) =>
-    //     getToken().then((token) =>
-    //         fetch("/api/need", {
-    //             method: "POST",
-    //             headers: {
-    //                 Authorization: `Bearer ${token}`,
-    //                 "Content-Type": "application/json",
-    //             },
-    //             body: JSON.stringify(need)
-    //         }).then(resp => {
-    //             if (resp.ok) {
-    //                 return resp.json();
-    //             }
-    //             throw new Error("Unauthorized");
-    //         }));
+    const addEvent = (event) =>
+        getToken().then((token) =>
+            fetch("/api/event", {
+                method: "POST",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(event)
+            }).then(resp => {
+                if (resp.ok) {
+                    return resp.json();
+                }
+                throw new Error("Unauthorized");
+            }));
 
 
-    // const editNeed = (need) =>
-    //     getToken().then((token) =>
-    //         fetch(`/api/need/${need.id}`, {
-    //             method: "PUT",
-    //             headers: {
-    //                 Authorization: `Bearer ${token}`,
-    //                 "Content-Type": "application/json",
-    //             },
-    //             body: JSON.stringify(need),
-    //         }));
+    const editEvent = (event) =>
+        getToken().then((token) =>
+            fetch(`/api/event/${event.id}`, {
+                method: "PUT",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(event),
+            }));
 
-    // const deleteNeed = (id) =>
-    //     getToken().then((token) =>
-    //         fetch(`/api/need/${id}`, {
-    //             method: "DELETE",
-    //             headers: {
-    //                 Authorization: `Bearer ${token}`
-    //             }
-    //         }));
+    const deleteEvent = (id) =>
+        getToken().then((token) =>
+            fetch(`/api/event/${id}`, {
+                method: "DELETE",
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }));
 
     return (
-        <EventContext.Provider value={{ events, getAllEvents }}>
+        <EventContext.Provider value={{ events, deleteEvent, addEvent, editEvent, getEventByNonProfitId, getEventById, getAllEvents }}>
             {props.children}
         </EventContext.Provider>
     );
