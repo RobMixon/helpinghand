@@ -1,21 +1,23 @@
 import React, { useContext, useRef, useEffect, useState } from "react";
 import { Form, FormGroup, Card, CardBody, Label, Input, Button } from "reactstrap";
-import { NeedContext } from "../../providers/NeedProvider";
+import { EventContext } from "../../providers/EventProvider";
 import { NonProfitContext } from "../../providers/NonProfitProvider";
 import { useHistory } from "react-router-dom";
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';
+import DateTimePicker from 'react-datetime-picker';
 
-const NeedForm = () => {
-    const { addNeed } = useContext(NeedContext);
+const EventForm = () => {
+    const { addEvent } = useContext(EventContext);
     const { getNonProfitByOwnerId } = useContext(NonProfitContext);
     const [nonProfit, setNonProfit] = useState();
     const history = useHistory();
-    const item = useRef();
-    const quantity = useRef();
+    const name = useRef();
     const description = useRef();
+    const comments = useRef();
     const location = useRef();
     const [NPID, setNPID] = useState();
+    const [dateTime, setDateTime] = useState();
 
     const currentUser = JSON.parse(sessionStorage.getItem("userProfile")).id;
 
@@ -27,33 +29,37 @@ const NeedForm = () => {
     }
 
     const submit = () => {
-        const need = {
-            item: item.current.value,
+        const event = {
+            name: name.current.value,
             nonProfitId: NPID,
-            quantity: quantity.current.value,
+            createDateTime: dateTime,
             description: description.current.value,
-            location: location.current.value
+            location: location.current.value,
+            comments: comments.current.value
         };
 
-        if (need.item === "") {
+        if (event.name === "") {
             window.alert("Please add an item")
         }
-        if (need.quantity === "") {
+        if (event.createDateTime === "") {
             window.alert("Please add a quantity")
         }
-        if (need.description === "") {
+        if (event.description === "") {
             window.alert("please give a description")
         }
-        if (need.location === "") {
+        if (event.location === "") {
             window.alert("please give us a location")
         }
-        if (need.nonProfitId === "") {
+        if (event.nonProfitId === "") {
             window.alert("please select one of your nonProfits")
         }
+        if (event.comments === "") {
+            window.alert("please enter in a comment")
+        }
 
-        if (need.item !== "" && need.location !== "" && need.description !== "" && need.quantity !== "") {
-            addNeed(need).then((res) => {
-                history.push(`/need`);
+        if (event.item !== "" && event.location !== "" && event.description !== "" && event.quantity !== "") {
+            addEvent(event).then((res) => {
+                history.push(`/event`);
             });
         }
     };
@@ -84,17 +90,20 @@ const NeedForm = () => {
                                 </div>
                             </DropdownButton>
                             <FormGroup>
-                                <Label for="item">Item</Label>
+                                <Label for="name">Name</Label>
                                 <Input
-                                    id="item"
-                                    innerRef={item}
+                                    id="name"
+                                    innerRef={name}
                                 />
                             </FormGroup>
                             <FormGroup>
-                                <Label for="quantity">Quantity</Label>
-                                <Input type="textarea"
-                                    rows="1" id="quantity"
-                                    innerRef={quantity} />
+                                <DateTimePicker
+                                    format="yyyy-MM-dd h:mm a"
+                                    onChange={setDateTime}
+                                    value={dateTime}
+                                    returnValue="end"
+                                    utc={true}
+                                />
                             </FormGroup>
                             <FormGroup>
                                 <Label for="description">Description</Label>
@@ -108,6 +117,12 @@ const NeedForm = () => {
                                     rows="2" id="location"
                                     innerRef={location} />
                             </FormGroup>
+                            <FormGroup>
+                                <Label for="comments">Comments</Label>
+                                <Input type="textarea"
+                                    rows="2" id="comments"
+                                    innerRef={comments} />
+                            </FormGroup>
                         </Form>
                         <Button
                             onClick={submit}
@@ -116,7 +131,7 @@ const NeedForm = () => {
                         </Button>
                         <Button
                             color="info"
-                            onClick={() => { history.push(`/need`) }}>
+                            onClick={() => { history.push(`/event`) }}>
                             Cancel
                         </Button>
                     </CardBody>
@@ -126,4 +141,4 @@ const NeedForm = () => {
     );
 };
 
-export default NeedForm;
+export default EventForm;

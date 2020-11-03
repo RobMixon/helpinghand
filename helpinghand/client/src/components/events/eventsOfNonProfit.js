@@ -1,33 +1,31 @@
 import React, { useEffect, useContext, useState } from "react";
 import { Button } from "reactstrap";
-import { NeedContext } from "../../providers/NeedProvider";
-import Need from "../needs/need";
+import { EventContext } from "../../providers/EventProvider";
+import Event from "../events/event";
 import { Link, useParams, useHistory } from "react-router-dom";
 
 
 
-const NeedsOfNonProfit = () => {
-    const { getNeedByNonProfitId } = useContext(NeedContext);
+const EventsOfNonProfit = () => {
+    const { getEventByNonProfitId } = useContext(EventContext);
     const { id } = useParams();
-    const [needs, setNeed] = useState();
+    const [events, setEvent] = useState();
     const history = useHistory();
 
     useEffect(() => {
-        getNeedByNonProfitId(id).then(setNeed);
+        getEventByNonProfitId(id).then(setEvent);
     }, []);
-    if (!needs) {
+    if (!events) {
         return null;
     }
-
-    let currentUser = JSON.parse(sessionStorage.getItem('userProfile')).id;
 
     return (
         <>
             <div className="container">
                 <div className="row justify-content-left">
                     <div className="cards-column">
-                        {needs.map((need) =>
-                            <Need key={need.id} need={need}
+                        {events.map((event) =>
+                            <Event key={event.id} event={event}
                             />
                         )}
                         <Button
@@ -45,4 +43,4 @@ const NeedsOfNonProfit = () => {
 
 };
 
-export default NeedsOfNonProfit;
+export default EventsOfNonProfit;

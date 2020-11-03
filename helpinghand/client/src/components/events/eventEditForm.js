@@ -1,43 +1,46 @@
 import React, { useState, useContext, useEffect, useRef } from "react";
 import { Form, FormGroup, Card, CardBody, Label, Input, Button } from "reactstrap";
-import { NeedContext } from "../../providers/NeedProvider";
+import { EventContext } from "../../providers/EventProvider";
 import { useHistory, useParams } from "react-router-dom";
+import DateTimePicker from 'react-datetime-picker';
 
-const NeedEditForm = () => {
-    const { editNeed, getNeedById } = useContext(NeedContext);
-    const [need, setNeed] = useState();
+const EventEditForm = () => {
+    const { editEvent, getEventById } = useContext(EventContext);
+    const [events, setEvent] = useState();
     const history = useHistory();
     const { id } = useParams();
     const [isLoading, setIsLoading] = useState(false);
-    const item = useRef();
+    const name = useRef();
     const location = useRef();
-    const quantity = useRef();
+    const comments = useRef();
     const description = useRef();
+    const [dateTime, setDateTime] = useState();
 
     const submit = event => {
         event.preventDefault();
         setIsLoading(true);
-        const updatedNeed = {
-            id: need.id,
-            nonProfitId: need.nonProfitId,
-            item: item.current.value,
-            quantity: quantity.current.value,
+        const updatedEvent = {
+            id: events.id,
+            nonProfitId: events.nonProfitId,
+            name: name.current.value,
+            createDateTime: dateTime,
             description: description.current.value,
-            location: location.current.value
+            location: location.current.value,
+            comments: comments.current.value
         }
 
-        editNeed(updatedNeed)
-            .then(() => history.push(`/need`));
+        editEvent(updatedEvent)
+            .then(() => history.push(`/event`));
     };
 
     useEffect(() => {
-        getNeedById(id).then(setNeed);
+        getEventById(id).then(setEvent);
     }, []);
-    if (!need) {
+    if (!events) {
         return null;
     }
 
-    if (need.nonProfit.ownerId === JSON.parse(sessionStorage.getItem("userProfile")).id) {
+    if (events.nonProfit.ownerId === JSON.parse(sessionStorage.getItem("userProfile")).id) {
         return (
             <div className="container pt-4">
                 <div className="row justify-content-center">
@@ -45,21 +48,22 @@ const NeedEditForm = () => {
                         <CardBody>
                             <Form>
                                 <FormGroup>
-                                    <Label for="item">Item</Label>
+                                    <Label for="name">Name</Label>
                                     <Input
-                                        id="item"
-                                        defaultValue={need.item}
-                                        innerRef={item}
+                                        id="name"
+                                        defaultValue={events.name}
+                                        innerRef={name}
                                     />
                                 </FormGroup>
                                 <FormGroup>
-                                    <Label for="quantity">Quantity</Label>
-                                    <Input
-                                        id="quantity"
-                                        type="textarea"
-                                        rows="1"
-                                        defaultValue={need.quantity}
-                                        innerRef={quantity} />
+                                    <DateTimePicker
+                                        format="yyyy-MM-dd h:mm a"
+                                        onChange={setDateTime}
+                                        value={dateTime}
+                                        returnValue="end"
+                                        defaultValue={events.createDateTime}
+                                        utc={true}
+                                    />
                                 </FormGroup>
                                 <FormGroup>
                                     <Label for="description">Description</Label>
@@ -67,7 +71,7 @@ const NeedEditForm = () => {
                                         id="description"
                                         type="textarea"
                                         rows="5"
-                                        defaultValue={need.description}
+                                        defaultValue={events.description}
                                         innerRef={description} />
                                 </FormGroup>
                                 <FormGroup>
@@ -76,8 +80,15 @@ const NeedEditForm = () => {
                                         id="location"
                                         type="textarea"
                                         rows="1"
-                                        defaultValue={need.location}
+                                        defaultValue={events.location}
                                         innerRef={location} />
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label for="comments">Comments</Label>
+                                    <Input type="textarea"
+                                        rows="2" id="comments"
+                                        defaultValue={events.location}
+                                        innerRef={comments} />
                                 </FormGroup>
                             </Form>
                             <Button
@@ -90,7 +101,7 @@ const NeedEditForm = () => {
                             <Button color="info"
                                 style={{ margin: 10 }}
                                 disabled={isLoading}
-                                onClick={() => { history.push(`/need`) }}>
+                                onClick={() => { history.push(`/event`) }}>
                                 Cancel
                         </Button>
                         </CardBody>
@@ -105,4 +116,4 @@ const NeedEditForm = () => {
     }
 };
 
-export default NeedEditForm;
+export default EventEditForm;

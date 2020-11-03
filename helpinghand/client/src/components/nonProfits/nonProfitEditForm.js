@@ -29,7 +29,6 @@ const NonProfitEditForm = () => {
             missionStatement: missionStatement.current.value,
             website: website.current.value
         }
-        console.log(updatedNonProfit, "blue")
 
         if (updatedNonProfit.name === "") {
             updatedNonProfit.name = nonProfit.name

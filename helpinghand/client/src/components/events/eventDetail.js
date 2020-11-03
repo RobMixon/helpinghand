@@ -1,19 +1,19 @@
 import React, { useEffect, useContext, useState } from "react";
-import { NeedContext } from "../../providers/NeedProvider";
+import { EventContext } from "../../providers/EventProvider";
 import { Link, useParams, useHistory } from "react-router-dom";
 import { Button, Card, CardBody } from "reactstrap";
 
-const NeedDetail = () => {
-    const [need, setNeed] = useState();
-    const { getNeedById } = useContext(NeedContext);
+const EventDetail = () => {
+    const [event, setEvent] = useState();
+    const { getEventById } = useContext(EventContext);
     const { id } = useParams();
     const history = useHistory();
 
 
     useEffect(() => {
-        getNeedById(id).then(setNeed);
+        getEventById(id).then(setEvent);
     }, []);
-    if (!need) {
+    if (!event) {
         return null;
     }
 
@@ -28,31 +28,31 @@ const NeedDetail = () => {
                             <CardBody>
                                 <div>
 
-                                    {(currentUser === need.nonProfit.ownerId) ?
-                                        <Link to={`/need/edit/${need.id}`}>
+                                    {(currentUser === event.nonProfit.ownerId) ?
+                                        <Link to={`/event/edit/${event.id}`}>
                                             <Button className="commentButton" color="info">Edit</Button>
                                         </Link>
                                         : <div></div>}
-                                    {(currentUser === need.nonProfit.ownerId) ?
-                                        <Link to={`/need/delete/${need.id}`}>
+                                    {(currentUser === event.nonProfit.ownerId) ?
+                                        <Link to={`/event/delete/${event.id}`}>
                                             <Button color="danger" className="commentButton">Delete</Button>
                                         </Link>
                                         : <div></div>}
 
                                 </div>
                                 <br></br>
-                                <div><span class="formText">Item: </span>{need.item}</div>
-                                <div><span class="formText">Description: </span>{need.description}</div>
-                                <div><span class="formText">Quantity: </span> {need.quantity}</div>
-                                <div><span class="formText">Location: </span>{need.location}</div>
-                                <div><span class="formText">Non-Profit in Need: </span>{need.nonProfit.name}</div>
-                                <div><span class="formText">Location of the Non-Profit: </span>{need.nonProfit.location}</div>
-                                <div><span class="formText">Get More Information on the Non-Profit: </span>{need.nonProfit.website}</div>
+                                <div><span class="formText">Item: </span>{event.name}</div>
+                                <div><span class="formText">Description: </span>{event.description}</div>
+                                <div><span class="formText">Quantity: </span> {event.createDateTime}</div>
+                                <div><span class="formText">Location: </span>{event.location}</div>
+                                <div><span class="formText">Non-Profit in event: </span>{event.nonProfit.name}</div>
+                                <div><span class="formText">Location of the Non-Profit: </span>{event.nonProfit.location} nonprofit location</div>
+                                <div><span class="formText">Get More Information on the Non-Profit: </span>{event.nonProfit.website}</div>
                                 <br></br>
                                 <Button
                                     color="info"
                                     onClick={() => {
-                                        history.push(`/need`)
+                                        history.push(`/event`)
                                     }}
                                 >Back
                                 </Button>
@@ -65,4 +65,4 @@ const NeedDetail = () => {
     );
 };
 
-export default NeedDetail;
+export default EventDetail;

@@ -9,9 +9,9 @@ namespace helpinghand.Models
     public class Event
     {
         public int Id { get; set; }
-
         [Required]
-        [MaxLength(50)]
+        public int NonProfitId { get; set; }
+        public NonProfit NonProfit { get; set; }
         public string Name { get; set; }
         public DateTime CreateDateTime { get; set; }
         public string Description { get; set; }
