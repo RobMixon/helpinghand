@@ -25,11 +25,6 @@ const NeedEditForm = () => {
             description: description.current.value,
             location: location.current.value
         }
-        console.log(updatedNeed, "blue")
-
-        if (updatedNeed.name === "") {
-            updatedNeed.name = need.name
-        }
 
         editNeed(updatedNeed)
             .then(() => history.push(`/need`));

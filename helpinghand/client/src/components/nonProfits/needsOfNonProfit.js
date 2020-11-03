@@ -14,11 +14,12 @@ const NeedsOfNonProfit = () => {
 
     useEffect(() => {
         getNeedByNonProfitId(id).then(setNeed);
-        console.log(needs, "needs")
     }, []);
     if (!needs) {
         return null;
     }
+
+    let currentUser = JSON.parse(sessionStorage.getItem('userProfile')).id;
 
     return (
         <>

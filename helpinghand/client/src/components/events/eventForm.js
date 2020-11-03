@@ -5,6 +5,7 @@ import { NonProfitContext } from "../../providers/NonProfitProvider";
 import { useHistory } from "react-router-dom";
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';
+import DateTimePicker from 'react-datetime-picker';
 
 const EventForm = () => {
     const { addEvent } = useContext(EventContext);
@@ -12,11 +13,11 @@ const EventForm = () => {
     const [nonProfit, setNonProfit] = useState();
     const history = useHistory();
     const name = useRef();
-    const createDateTime = useRef();
     const description = useRef();
     const comments = useRef();
     const location = useRef();
     const [NPID, setNPID] = useState();
+    const [dateTime, setDateTime] = useState();
 
     const currentUser = JSON.parse(sessionStorage.getItem("userProfile")).id;
 
@@ -31,13 +32,12 @@ const EventForm = () => {
         const event = {
             name: name.current.value,
             nonProfitId: NPID,
-            createDateTime: createDateTime.current.value,
+            createDateTime: dateTime,
             description: description.current.value,
             location: location.current.value,
             comments: comments.current.value
         };
 
-        console.log(event, "event");
         if (event.name === "") {
             window.alert("Please add an item")
         }
@@ -69,9 +69,6 @@ const EventForm = () => {
         setNPID(selected[0].id)
     }
 
-    console.log(NPID, "setting ID")
-    console.log(nonProfit, "blue")
-
     return (
         <div className="container pt-4">
             <div className="row justify-content-center">
@@ -100,10 +97,13 @@ const EventForm = () => {
                                 />
                             </FormGroup>
                             <FormGroup>
-                                <Label for="createDateTime">Date</Label>
-                                <Input type="textarea"
-                                    rows="1" id="createDateTime"
-                                    innerRef={createDateTime} />
+                                <DateTimePicker
+                                    format="yyyy-MM-dd h:mm a"
+                                    onChange={setDateTime}
+                                    value={dateTime}
+                                    returnValue="end"
+                                    utc={true}
+                                />
                             </FormGroup>
                             <FormGroup>
                                 <Label for="description">Description</Label>

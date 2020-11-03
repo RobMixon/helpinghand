@@ -35,7 +35,6 @@ const NeedForm = () => {
             location: location.current.value
         };
 
-        console.log(need, "need");
         if (need.item === "") {
             window.alert("Please add an item")
         }
@@ -63,9 +62,6 @@ const NeedForm = () => {
         let selected = nonProfit.filter(nonProfit => nonProfit.name === e)
         setNPID(selected[0].id)
     }
-
-    console.log(NPID, "setting ID")
-    console.log(nonProfit, "blue")
 
     return (
         <div className="container pt-4">

@@ -2,6 +2,7 @@ import { Button, Card, CardBody } from "reactstrap";
 import React from "react";
 import { Link } from "react-router-dom"
 import "./event.css";
+import moment from 'moment';
 
 const Event = ({ event }) => {
 
@@ -30,7 +31,7 @@ const Event = ({ event }) => {
 
                     </div>
                     <div><span class="formText">Event: </span> {event.name}</div>
-                    <div><span class="formText">Date: </span> {event.createDateTime}</div>
+                    <div><span class="formText">Date: </span> {moment(event.createDateTime).format("MMMM Do YYYY, h:mm a")}</div>
                     <div><span class="formText">Location: </span>{event.location}</div>
                     <div><span class="formText">Description: </span> {event.description}</div>
                     <div><span class="formText">Non-Profit in Need: </span>{event.nonProfit.name}</div>

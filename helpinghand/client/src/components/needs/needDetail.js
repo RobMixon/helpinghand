@@ -46,7 +46,7 @@ const NeedDetail = () => {
                                 <div><span class="formText">Quantity: </span> {need.quantity}</div>
                                 <div><span class="formText">Location: </span>{need.location}</div>
                                 <div><span class="formText">Non-Profit in Need: </span>{need.nonProfit.name}</div>
-                                <div><span class="formText">Location of the Non-Profit: </span>{need.nonProfit.location} nonprofit location</div>
+                                <div><span class="formText">Location of the Non-Profit: </span>{need.nonProfit.location}</div>
                                 <div><span class="formText">Get More Information on the Non-Profit: </span>{need.nonProfit.website}</div>
                                 <br></br>
                                 <Button

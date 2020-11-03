@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect, useRef } from "react";
 import { Form, FormGroup, Card, CardBody, Label, Input, Button } from "reactstrap";
 import { EventContext } from "../../providers/EventProvider";
 import { useHistory, useParams } from "react-router-dom";
+import DateTimePicker from 'react-datetime-picker';
 
 const EventEditForm = () => {
     const { editEvent, getEventById } = useContext(EventContext);
@@ -11,9 +12,9 @@ const EventEditForm = () => {
     const [isLoading, setIsLoading] = useState(false);
     const name = useRef();
     const location = useRef();
-    const createDateTime = useRef();
     const comments = useRef();
     const description = useRef();
+    const [dateTime, setDateTime] = useState();
 
     const submit = event => {
         event.preventDefault();
@@ -22,15 +23,10 @@ const EventEditForm = () => {
             id: events.id,
             nonProfitId: events.nonProfitId,
             name: name.current.value,
-            createDateTime: createDateTime.current.value,
+            createDateTime: dateTime,
             description: description.current.value,
             location: location.current.value,
             comments: comments.current.value
-        }
-        console.log(updatedEvent, "blue")
-
-        if (updatedEvent.name === "") {
-            updatedEvent.name = event.name
         }
 
         editEvent(updatedEvent)
@@ -43,7 +39,6 @@ const EventEditForm = () => {
     if (!events) {
         return null;
     }
-    console.log(events, "event");
 
     if (events.nonProfit.ownerId === JSON.parse(sessionStorage.getItem("userProfile")).id) {
         return (
@@ -61,13 +56,14 @@ const EventEditForm = () => {
                                     />
                                 </FormGroup>
                                 <FormGroup>
-                                    <Label for="createDateTime">Date</Label>
-                                    <Input
-                                        id="createDateTime"
-                                        type="textarea"
-                                        rows="1"
+                                    <DateTimePicker
+                                        format="yyyy-MM-dd h:mm a"
+                                        onChange={setDateTime}
+                                        value={dateTime}
+                                        returnValue="end"
                                         defaultValue={events.createDateTime}
-                                        innerRef={createDateTime} />
+                                        utc={true}
+                                    />
                                 </FormGroup>
                                 <FormGroup>
                                     <Label for="description">Description</Label>

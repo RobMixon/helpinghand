@@ -13,8 +13,6 @@ const EventList = () => {
         getAllEvents();
     }, []);
 
-    console.log(events, "eventsList")
-
     return (
         <>
             <div className="container">

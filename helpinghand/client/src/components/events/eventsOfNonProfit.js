@@ -14,7 +14,6 @@ const EventsOfNonProfit = () => {
 
     useEffect(() => {
         getEventByNonProfitId(id).then(setEvent);
-        console.log(events, "events")
     }, []);
     if (!events) {
         return null;
