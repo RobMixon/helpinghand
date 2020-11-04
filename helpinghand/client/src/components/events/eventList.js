@@ -31,7 +31,7 @@ const EventList = () => {
                         <Button color="info" className="commentButton">Add Event</Button>
                     </Link>
                     <DropdownButton
-                        title="Search by NonProfit"
+                        title="Filter by NonProfit"
                         id="dropdown-menu"
                         className="nonProfit_Dropdown_menu"
                         onSelect={handleSelect}>
